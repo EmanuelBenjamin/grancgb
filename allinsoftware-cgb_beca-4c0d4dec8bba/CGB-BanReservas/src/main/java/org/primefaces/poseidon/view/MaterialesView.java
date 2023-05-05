@@ -12,6 +12,8 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
+import org.primefaces.poseidon.domain.Materiales;
+import org.primefaces.poseidon.service.MaterialesService;
 
 /**
  *
