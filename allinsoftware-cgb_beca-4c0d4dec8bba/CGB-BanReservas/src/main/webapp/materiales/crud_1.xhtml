@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">MATERIALES</ui:define>
+
+    <ui:define name="viewname">
+        <li>GENERAL</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/crud">CRUD</p:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="grid crud-demo">
+                <div class="col-12">
+                    <div class="card">
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:toolbar styleClass="mb-4">
+                            <p:toolbarGroup>
+                                <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{materialesView.openNew}" update="manage-materiales-content" oncomplete="PF('manageMaterialesDialog').show()" 
+                                                 styleClass="ui-button-success" style="margin-right: .5rem" />
+                                <p:commandButton id="delete-materiales-button" value="#{materialesView.deleteButtonMessage}" icon="pi pi-trash" actionListener="#{MaterialesView.deleteSelectedMateriales}" 
+                                                 styleClass="ui-button-danger" disabled="#{!materialesView.hasSelectedMateriales()}" update="@this">
+                                    <p:confirm header="Confirmation" message="Eliminar los materiales seleccionados?" icon="pi pi-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:toolbarGroup>
+                            <p:toolbarGroup>
+                                <p:fileUpload mode="simple" skinSimple="true" label="Import" chooseIcon="pi pi-download" />
+                                <p:commandButton value="Exportar" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
+                                    <p:dataExporter type="pdf" target="dt-materiales" fileName="materiales"/>
+                                </p:commandButton>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:dataTable id="dt-materiales" widgetVar="dtMateriales" var="material" value="#{materialesView.materiales}" reflow="true" styleClass="products-table"
+                                     selection="#{materialesView.selectedMateriales}" rowKey="#{materiales.id}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                <div class="products-table-header">
+                                    <span style="font-weight: bold">Tipos de Materiales</span>
+
+                                    <span class="filter-container ui-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtEdificaciones').filter()" placeholder="Search" />
+                                    </span>
+                                </div>
+                            </f:facet>
+
+                            <p:ajax event="rowToggle" listener="#{materialesView.onRowToggle}" />
+                            <p:ajax event="rowSelect" update=":form:delete-materiales-button" />
+                            <p:ajax event="rowUnselect" update=":form:delete-materiales-button" />
+                            <p:ajax event="rowSelectCheckbox" update=":form:delete-materiales-button" />
+                            <p:ajax event="rowUnselectCheckbox" update=":form:delete-materiales-button" />
+                            <p:ajax event="toggleSelect" update=":form:delete-materiales-button" />
+
+
+                            <p:column selectionMode="multiple" exportable="false"></p:column>
+                            <p:column headerText="id" sortBy="#{material.id}" filterBy="#{material.id}">
+                                <h:outputText value="#{material.id}" />
+                            </p:column>
+                            <p:column headerText="Descripcion" sortBy="#{material.descripcion}" filterBy="#{material.descripcion}">
+                                <h:outputText value="#{material.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Eliminado" sortBy="#{material.eliminado}" filterBy="#{material.eliminado}">
+                                <h:outputText value="#{material.eliminado}" />
+                            </p:column>
+                            <p:column headerText="Usuario" sortBy="#{material.usuario}" filterBy="#{material.usuario}">
+                                <h:outputText value="#{material.usuario}" />
+                            </p:column>
+                            <p:column headerText="Fecha" sortBy="#{material.fecha}" filterBy="#{material.fecha}">
+                                <h:outputText value="#{material.fecha}" />
+                            </p:column>
+                            <p:column headerText="IP" sortBy="#{material.ip}" filterBy="#{material.ip}">
+                                <h:outputText value="#{material.ip}" />
+                            </p:column>
+                            <p:column exportable="false">
+                                <p:commandButton icon="pi pi-pencil" oncomplete="PF('manageMaterialDialog').show()" update=":form:manage-material-content" 
+                                    styleClass="edit-button rounded-button ui-button-success" process="@this">
+                                    <f:setPropertyActionListener value="#{material}" target="#{materialView.selectedmaterial}" />
+                                </p:commandButton>
+                                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this" oncomplete="PF('deleteMaterialDialog').show()" >
+                                    <f:setPropertyActionListener value="#{material}" target="#{MaterialView.selectedMaterial}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:dialog header="Detalles del Material" showEffect="fade" modal="true" widgetVar="manageMaterialDialog" responsive="true">
+                            <p:outputPanel id="manage-material-content" class="ui-fluid">
+                                <p:outputPanel rendered="#{not empty tipoMaterialView.selectedMaterial}">
+                                    <div class="field">
+                                        <p:outputLabel for="id">ID</p:outputLabel>
+                                        <p:inputText id="id" value="#{materialView.selectedMaterial.id}" required="true" />
+                                    </div>
+                                    <div class="field">
+                                        <p:outputLabel for="Descripcion">DESCRIPCION</p:outputLabel>
+                                        <p:inputText id="Descripcion" value="#{materialView.selectedMaterial.Descripcion}" required="true" />
+                                    </div>
+                                    <div class="field">
+                                        <p:outputLabel for="Eliminado">ELIMINADO</p:outputLabel>
+                                        <p:inputText id="Eliminado" value="#{materialView.selectedMaterial.Eliminado}" required="true" />
+                                    </div>
+                                    <div class="field">
+                                        <p:outputLabel for="Usuario">USUARIO</p:outputLabel>
+                                        <p:inputText id="Usuario" value="#{materialView.selectedMaterial.Usuario}" required="true" />
+                                    </div>
+                                    <div class="field">
+                                        <p:outputLabel for="Fecha">FECHA</p:outputLabel>
+                                        <p:inputText id="Fecha" value="#{materialView.selectedMaterial.Fecha}" required="true" />
+                                    </div>
+                                    <div class="field">
+                                        <p:outputLabel for="IP">IP</p:outputLabel>
+                                        <p:inputText id="IP" value="#{materialView.selectedMaterial.IP}" required="true" />
+                                    </div>
+                                </p:outputPanel>
+                            </p:outputPanel>
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{materialView.save}" update="manage-material-content" process="manage-material-content @this"/>
+                                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageMaterialDialog').hide()" class="ui-button-secondary" />
+                            </f:facet>
+                        </p:dialog>
+
+                        <p:confirmDialog widgetVar="deleteMaterialDialog" showEffect="fade" width="300" message="Eliminar el tipo de material?" header="Confirm" severity="warn">
+                            <p:commandButton value="Si" icon="pi pi-check" actionListener="#{materialView.deleteMaterial}" process="@this" oncomplete="PF('deleteMaterialDialog').hide()"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteMaterialDialog').hide()" />
+                        </p:confirmDialog>
+
+                        <p:confirmDialog global="true" showEffect="fade" width="300">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary" icon="pi pi-times" />
+                        </p:confirmDialog>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
