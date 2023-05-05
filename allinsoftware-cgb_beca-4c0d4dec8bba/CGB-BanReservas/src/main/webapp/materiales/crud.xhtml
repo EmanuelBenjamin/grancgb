@@ -6,10 +6,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
+        <title>MATERIALES</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div>TODO write content</div>
-    </body>
+	<h1>Materiales CRUD</h1>
+	<h2>Crear nuevo registro</h2>
+	<form action="crear_material.php" method="POST">
+		<label for="descripcion">Descripción:</label>
+		<input type="text" name="descripcion" id="descripcion" required><br><br>
+		<label for="usuario">Usuario:</label>
+		<input type="text" name="usuario" id="usuario" required><br><br>
+		<label for="fecha">Fecha:</label>
+		<input type="date" name="fecha" id="fecha" required><br><br>
+		<label for="ip">IP:</label>
+		<input type="text" name="ip" id="ip" required><br><br>
+		<input type="submit" value="Crear">
+	</form>
+	
+	<h2>Eliminar registro</h2>
+	<form action="eliminar_material.php" method="POST">
+		<label for="id">ID:</label>
+		<input type="number" name="id" id="id" required><br><br>
+		<input type="submit" value="Eliminar">
+	</form>
+</body>
 </html>
