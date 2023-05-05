@@ -4,6 +4,9 @@
  */
 package org.primefaces.poseidon.service;
 
+import java.util.List;
+import org.primefaces.poseidon.domain.Materiales;
+
 /**
  *
  * @author Asus
@@ -43,6 +46,22 @@ public class MaterialesService {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public List<Materiales> obtenerTodos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void crear(Materiales materialSeleccionado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void actualizar(Materiales materialSeleccionado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void eliminar(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
     
