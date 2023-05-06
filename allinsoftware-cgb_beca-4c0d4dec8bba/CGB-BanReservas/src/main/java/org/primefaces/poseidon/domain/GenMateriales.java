@@ -96,8 +96,4 @@ public class GenMateriales implements Serializable {
         return "GenMateriales{" + "idMat=" + idMat + ", DescripcionMat=" + DescripcionMat + ", EliminadoMat=" + EliminadoMat + ", UsuarioMat=" + UsuarioMat + ", FechaMat=" + FechaMat + ", IpMat=" + IpMat + '}';
     }
     
-    
-    
-    
-    
 }
