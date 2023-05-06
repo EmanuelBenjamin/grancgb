@@ -57,7 +57,8 @@ public List<GenMateriales>getMateriales(){
 public void guardar(GenMateriales materiales){
     Response response;
     if (materiales.getIdMateriales()== null){
-        Response response = webTarget.path("guardar")
+        Response response = webTarget.path("guardar") 
+                
     }
 }
 
