@@ -41,7 +41,8 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.0.0</version>
+            <version>9.1.0</version>
+            <type>jar</type>
         </dependency>
 
         <dependency>
@@ -106,7 +107,12 @@
             <artifactId>openpdf</artifactId>
             <version>${open-pdf.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <repositories>

@@ -13,7 +13,7 @@ import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
 import org.primefaces.poseidon.domain.Materiales;
-import org.primefaces.poseidon.service.MaterialesService;
+import org.primefaces.poseidon.service.GenMaterialesService;
 
 /**
  *
@@ -27,7 +27,7 @@ public class MaterialesView implements Serializable {
     private Materiales materialSeleccionado;
 
     @Inject
-    private MaterialesService materialesService;
+    private GenMaterialesService materialesService;
 
     @PostConstruct
     public void init() {
