@@ -47,12 +47,12 @@
 
                                     <span class="filter-container ui-input-icon-left">
                                         <i class="pi pi-search"></i>
-                                        <p:inputText id="globalFilter" onkeyup="PF('dtEdificaciones').filter()" placeholder="Search" />
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriales').filter()" placeholder="Search" />
                                     </span>
                                 </div>
                             </f:facet>
 
-                            <p:ajax event="rowToggle" listener="#{materialesView.onRowToggle}" />
+                            <p:ajax event="rowSelect" listener="#{materialesView.onRowToggle}" />
                             <p:ajax event="rowSelect" update=":form:delete-materiales-button" />
                             <p:ajax event="rowUnselect" update=":form:delete-materiales-button" />
                             <p:ajax event="rowSelectCheckbox" update=":form:delete-materiales-button" />
